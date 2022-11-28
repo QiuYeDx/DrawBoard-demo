@@ -408,6 +408,26 @@ public class UI extends JFrame implements ActionListener, ItemListener, Serializ
 				}
 			}
 		});
+		//显示选中图形位置
+		jl2.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// 获取所有被选中的选项索引
+				int[] indices = jl2.getSelectedIndices();
+				// 获取选项数据的 ListModel
+				ListModel<String> listModel = jl2.getModel();
+				// 输出选中的选项
+				String selectedName = listModel.getElementAt(indices[0]);
+				for (int i = 0; i < DrawListener.arrayD.size(); i++) {
+					if (DrawListener.arrayD.get(i).getNameStr().equals(selectedName))
+						draw(g, DrawListener.arrayD.get(i).getX1(),
+								DrawListener.arrayD.get(i).getY1(),
+								DrawListener.arrayD.get(i).getX2(),
+								DrawListener.arrayD.get(i).getY2()
+						);
+				}
+			}
+		});
 
 		// 对以上列表中选中的图形进行重命名
 		JLabel label2 = new JLabel("修改选中名称：");
